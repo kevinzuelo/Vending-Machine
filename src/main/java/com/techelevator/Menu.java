@@ -7,9 +7,6 @@ public class Menu {
 
     // Constructors
 
-    public Menu(int choice) {
-        this.choice = choice;
-    }
 
 
     // Getters and setters
@@ -18,6 +15,9 @@ public class Menu {
         return choice;
     }
 
+    public void setChoice(int choice) {
+        this.choice = choice;
+    }
 
     // Other methods
     public void displayMenu() {

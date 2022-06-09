@@ -1,6 +1,6 @@
 package com.techelevator;
 
-public class VendingItems {
+public class VendingItem {
 
     // Properties
     private String name;
@@ -10,7 +10,7 @@ public class VendingItems {
 
     // Constructors
 
-    public VendingItems(String name, double price) {
+    public VendingItem(String name, double price) {
         this.name = name;
         this.price = price;
     }
@@ -27,7 +27,7 @@ public class VendingItems {
     }
 
 
-    // Other methods
+    // Other methods -- change message to fit VendingItem type somehow
 
     public void getMessage(String type) {
 

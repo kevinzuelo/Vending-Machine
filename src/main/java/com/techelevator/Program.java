@@ -8,8 +8,12 @@ public class Program {
 
 	public static void main(String[] args) {
 
-		Machine vendingMachine = new Machine();
-		vendingMachine.fillMachine(path);
+		Inventory inventory = new Inventory();
+		inventory.getInventory(path);
+
+
+//		Machine vendingMachine = new Machine();
+//		vendingMachine.fillMachine(path);
 
 		Scanner scanner = new Scanner(System.in);
 

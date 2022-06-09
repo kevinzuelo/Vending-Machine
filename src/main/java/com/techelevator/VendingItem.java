@@ -28,9 +28,8 @@ public class VendingItem {
         this.type = type;
     }
 
-    Queue<VendingItem> itemList = new LinkedList<>();
 
-    
+
     // Getters and setters
 
     public String getName() {

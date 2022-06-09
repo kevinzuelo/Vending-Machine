@@ -4,7 +4,12 @@ import java.util.Scanner;
 
 public class Program {
 
+	private static final String path = "vendingmachine.csv";
+
 	public static void main(String[] args) {
+
+		Machine vendingMachine = new Machine();
+		vendingMachine.fillMachine(path);
 
 		Scanner scanner = new Scanner(System.in);
 

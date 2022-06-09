@@ -1,5 +1,10 @@
 package com.techelevator;
 
+import java.io.File;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
 public class VendingItem {
 
     // Properties
@@ -7,6 +12,7 @@ public class VendingItem {
     private double price;
     private String message;
     private String type;
+    private String location;
 
     // Constructors
 
@@ -15,7 +21,16 @@ public class VendingItem {
         this.price = price;
     }
 
+    public VendingItem(String location, String name, double price, String type ){
+        this.location = location;
+        this.name = name;
+        this.price = price;
+        this.type = type;
+    }
 
+    Queue<VendingItem> itemList = new LinkedList<>();
+
+    
     // Getters and setters
 
     public String getName() {
@@ -32,6 +47,8 @@ public class VendingItem {
     public void getMessage(String type) {
 
     }
+
+
 
 
 }

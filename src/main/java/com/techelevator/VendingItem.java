@@ -40,8 +40,19 @@ public class VendingItem {
         return price;
     }
 
+    public String getMessage() {
+        return message;
+    }
 
-    // Other methods -- change message to fit VendingItem type somehow
+    public String getType() {
+        return type;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+// Other methods -- change message to fit VendingItem type somehow
 
     public void getMessage(String type) {
 

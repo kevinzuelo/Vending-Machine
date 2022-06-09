@@ -1,5 +1,8 @@
 package com.techelevator;
 
+import java.util.List;
+import java.util.Queue;
+
 public class MainMenu extends Menu{
 
 
@@ -7,7 +10,8 @@ public class MainMenu extends Menu{
     public void choiceResponse() {
         if (getChoice() == 1) {
             // display all items including quantity remaining
-            
+//            Inventory inventory = new Inventory();
+//            Queue<VendingItem> queue = inventory.getQueues();
 
 
         }
@@ -23,8 +27,6 @@ public class MainMenu extends Menu{
             choiceResponse();
         }
     }
-
-
 
 
     @Override

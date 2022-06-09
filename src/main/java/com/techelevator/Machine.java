@@ -18,6 +18,21 @@ public class Machine {
 
     // Getters and Setters
 
+    public int getQuantityRemaining() {
+        return quantityRemaining;
+    }
+
+    public Map<String, Queue> getSlots() {
+        return slots;
+    }
+
+    public double getMachineBalance() {
+        return machineBalance;
+    }
+
+    public double getInputMoney() {
+        return inputMoney;
+    }
 
 
     // Other Methods - vendItem(), update inputMoney / machineBalance, fillMachine
@@ -32,5 +47,11 @@ public class Machine {
         }
 
     }
+
+//    public String getMachineContents() {
+//        System.out.println();
+//
+//    }
+
 
 }

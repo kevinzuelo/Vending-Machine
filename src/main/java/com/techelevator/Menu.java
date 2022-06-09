@@ -15,7 +15,7 @@ public class Menu {
         return choice;
     }
 
-    public void setChoice(int choice) {
+     public void setChoice(int choice) {
         this.choice = choice;
     }
 
@@ -23,6 +23,11 @@ public class Menu {
     public void displayMenu() {}
 
     public void displayItems() {}
+
+    // display all items including quantity remaining
+
+
+
 
 
 }

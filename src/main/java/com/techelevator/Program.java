@@ -21,12 +21,15 @@ public class Program {
 		mainMenu.setChoice(Integer.parseInt(scanner.nextLine()));
 
 
-
 		System.out.println();
 		PurchaseMenu purchaseMenu = new PurchaseMenu();
 		purchaseMenu.displayMenu();
 		purchaseMenu.setChoice(Integer.parseInt(scanner.nextLine()));
 
+		// Prompt user for account number
+			// Prompt for how much money they want to add
+
+		
 
 
 

@@ -28,8 +28,6 @@ public class VendingItem {
         this.type = type;
     }
 
-
-
     // Getters and setters
 
     public String getName() {
@@ -52,7 +50,7 @@ public class VendingItem {
         return location;
     }
 
-// Other methods -- change message to fit VendingItem type somehow
+    // Other methods -- change message to fit VendingItem type somehow
 
     public void getMessage(String type) {
 

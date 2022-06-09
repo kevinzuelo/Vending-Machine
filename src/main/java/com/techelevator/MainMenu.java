@@ -3,6 +3,28 @@ package com.techelevator;
 public class MainMenu extends Menu{
 
 
+    // method for choice response
+    public void choiceResponse() {
+        if (getChoice() == 1) {
+            // display all items including quantity remaining
+            
+
+
+        }
+        else if (getChoice() == 2) {
+            PurchaseMenu purchaseMenu = new PurchaseMenu();
+            purchaseMenu.displayMenu();
+        }
+        else if (getChoice() == 3) {
+            System.exit(0);
+        }
+        else {
+            System.out.println("Invalid choice. Please enter 1, 2, or 3!");
+            choiceResponse();
+        }
+    }
+
+
 
 
     @Override

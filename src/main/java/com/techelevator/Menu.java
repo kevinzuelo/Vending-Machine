@@ -20,8 +20,9 @@ public class Menu {
     }
 
     // Other methods
-    public void displayMenu() {
+    public void displayMenu() {}
 
-    }
+    public void displayItems() {}
+
 
 }

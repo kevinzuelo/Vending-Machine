@@ -2,10 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Machine {
 
@@ -29,11 +26,11 @@ public class Machine {
        Inventory inventory = new Inventory();
        inventory.getInventory(path);
 
-//       for (VendingItem item : inventory.getItemList()) {
-//           String itemLocation = item.getLocation();
-//                if (itemLocation.equals("A1"))
-//       }
-//
+       Map<String, Queue> myMap = new HashMap<>();
+        for (Queue<VendingItem> queue : inventory.getQueues()) {
+            myMap.put(queue.element().getLocation(), queue);
+        }
+
     }
 
 }

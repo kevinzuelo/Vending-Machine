@@ -14,6 +14,10 @@ public class Inventory {
         return itemList;
     }
 
+    public List<Queue> getQueues() {
+        return queues;
+    }
+
     public void getInventory(String path) {
         File inventoryFile = new File(path);
         try (Scanner fileScanner = new Scanner(inventoryFile)) {
@@ -35,6 +39,7 @@ public class Inventory {
             System.out.println("Go fish");
         }
     }
+
 
 
 

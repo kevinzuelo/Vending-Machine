@@ -3,7 +3,10 @@ package com.techelevator;
 public class Money {
 
     // Properties
-    private double balance;
+    private int quarter = 0;
+    private int dime = 0;
+    private int nickel = 0;
+
 
 
     // Constructor
@@ -11,10 +14,11 @@ public class Money {
 
 
     // Getters and setters
+    public void calculateChange(double change ) {
 
-    public double getBalance() {
-        return balance;
     }
+
+
 
 
     // Other methods -- initial and updated balances

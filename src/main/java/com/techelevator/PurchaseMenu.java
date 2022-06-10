@@ -1,7 +1,8 @@
 package com.techelevator;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.*;
-
 public class PurchaseMenu extends Menu{
 
     // Properties
@@ -16,7 +17,7 @@ public class PurchaseMenu extends Menu{
             if (choice == 1) {
 
                 System.out.print("Enter amount of dollars: ");
-                double numberOfDollars = Double.parseDouble(inputScanner.nextLine());
+                BigDecimal numberOfDollars = BigDecimal.valueOf(Double.parseDouble(inputScanner.nextLine()));
                 currentMachine.setTransactionBalance(numberOfDollars);
                 System.out.println("Current amount provided: $ " + numberOfDollars);
                 System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance());
@@ -34,7 +35,7 @@ public class PurchaseMenu extends Menu{
                 System.out.print("Choose Item Location: ");
                  location = inputScanner.nextLine();
 
-                 if(currentMachine.getFirstItem(location).getPrice() < currentMachine.getTransactionBalance()) {
+                 if(currentMachine.getFirstItem(location).getPrice().compareTo(currentMachine.getTransactionBalance()) > 0) {
                      System.out.println("Insufficient funds, please insert more money.");
                      displayMenu();
                      System.out.print("Make a choice: ");
@@ -42,7 +43,9 @@ public class PurchaseMenu extends Menu{
                      choiceResponse(newChoice, stockedItems, currentMachine);
                  }
                  else {
-                     System.out.println(currentMachine.vendItem(location).getName() + " Updated Balance: " + currentMachine.getTransactionBalance());
+                     VendingItem thisItem = currentMachine.vendItem(location);
+                     System.out.println(thisItem.getName() + " " + thisItem.getPrice() + " " + thisItem.printMessage() +"\n" +
+                             "Remaining balance in machine: " + currentMachine.getTransactionBalance());
                      displayMenu();
                      System.out.print("Make a choice: ");
                      int newChoice = inputScanner.nextInt();
@@ -50,7 +53,7 @@ public class PurchaseMenu extends Menu{
                  }
 
             } else if (choice == 3) {
-                System.exit(0);
+                currentMachine.calculateChange(currentMachine.getTransactionBalance());
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
                 return;

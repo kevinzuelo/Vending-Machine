@@ -1,8 +1,6 @@
 package com.techelevator;
 
-import java.util.Map;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class PurchaseMenu extends Menu{
 
@@ -35,13 +33,31 @@ public class PurchaseMenu extends Menu{
                 }
                 System.out.print("Choose Item Location: ");
                  location = inputScanner.nextLine();
-                System.out.println(currentMachine.vendItem(location).getName() + " Updated Balance: " + currentMachine.getTransactionBalance());
+
+                 if(currentMachine.getFirstItem(location).getPrice() < currentMachine.getTransactionBalance()) {
+                     System.out.println("Insufficient funds, please insert more money.");
+                     displayMenu();
+                     System.out.print("Make a choice: ");
+                     int newChoice = inputScanner.nextInt();
+                     choiceResponse(newChoice, stockedItems, currentMachine);
+                 }
+                 else {
+                     System.out.println(currentMachine.vendItem(location).getName() + " Updated Balance: " + currentMachine.getTransactionBalance());
+                     displayMenu();
+                     System.out.print("Make a choice: ");
+                     int newChoice = inputScanner.nextInt();
+                     choiceResponse(newChoice, stockedItems, currentMachine);
+                 }
+
             } else if (choice == 3) {
                 System.exit(0);
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
                 return;
             }
+        }
+        catch (NoSuchElementException e) {
+
         }
     }
     @Override

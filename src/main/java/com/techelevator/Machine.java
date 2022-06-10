@@ -5,8 +5,6 @@ import java.util.*;
 public class Machine {
 
     // Properties
-
-    private int quantityRemaining;
     private Map<String, Queue> slots;
     private double transactionBalance;
 
@@ -14,9 +12,6 @@ public class Machine {
 
     // Getters & Setters
 
-    public int getQuantityRemaining() {
-        return quantityRemaining;
-    }
     public Map<String, Queue> getSlots() {
         return slots;
     }
@@ -32,11 +27,10 @@ public class Machine {
         // to add: vendItem(), update inputMoney / machineBalance
     public VendingItem vendItem(String location) {
         Queue<VendingItem> temp = slots.get(location);
+            double itemPrice = temp.element().getPrice();
+            transactionBalance -= itemPrice;
+            return (VendingItem)slots.get(location).poll();
 
-        double itemPrice = temp.element().getPrice();
-        transactionBalance -= itemPrice;
-
-        return (VendingItem)slots.get(location).poll();
     }
     // Creates a new Inventory object
     public Map<String, Queue> fillMachine(String path){
@@ -46,15 +40,13 @@ public class Machine {
         Map<String, Queue> myMap = new HashMap<>();
         for (Queue<VendingItem> queue : inventory.getQueues()) {
             myMap.put(queue.element().getLocation(), queue);
-
-        }slots = myMap;
+        }
+        slots = myMap;
         return slots;
     }
 
-//    public String getMachineContents() {
-//        System.out.println();
-//
-//    }
-
+    public VendingItem getFirstItem(String location) {
+        return (VendingItem)slots.get(location).element();
+    }
 
 }

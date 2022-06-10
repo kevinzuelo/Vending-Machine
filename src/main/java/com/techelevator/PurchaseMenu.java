@@ -2,7 +2,13 @@ package com.techelevator;
 
 public class PurchaseMenu extends Menu{
 
+    // Properties
 
+    // Constructors
+
+    // Getters & setters
+
+    // Other methods
 
     @Override
     public void displayMenu() {

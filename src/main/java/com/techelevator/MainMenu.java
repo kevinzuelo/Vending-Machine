@@ -4,16 +4,21 @@ import java.util.List;
 import java.util.Queue;
 
 public class MainMenu extends Menu{
+    // Properties
 
+    // Constructors
 
-    // method for choice response
+    // Getters & setters
+
+    // Other methods
+
+    // Method for menu choice response
     public void choiceResponse() {
         if (getChoice() == 1) {
-            // display all items including quantity remaining
+
+    // display all items including quantity remaining
 //            Inventory inventory = new Inventory();
 //            Queue<VendingItem> queue = inventory.getQueues();
-
-
         }
         else if (getChoice() == 2) {
             PurchaseMenu purchaseMenu = new PurchaseMenu();
@@ -27,7 +32,6 @@ public class MainMenu extends Menu{
             choiceResponse();
         }
     }
-
 
     @Override
     public void displayMenu() {

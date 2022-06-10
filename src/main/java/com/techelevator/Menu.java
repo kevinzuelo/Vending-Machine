@@ -3,13 +3,13 @@ package com.techelevator;
 public class Menu {
 
     // Properties
+
     private int choice;
 
     // Constructors
 
 
-
-    // Getters and setters
+    // Getters & setters
 
     public int getChoice() {
         return choice;
@@ -20,11 +20,12 @@ public class Menu {
     }
 
     // Other methods
+
     public void displayMenu() {}
 
     public void displayItems() {}
 
-    // display all items including quantity remaining
+    // Display all items including quantity remaining
 
 
 

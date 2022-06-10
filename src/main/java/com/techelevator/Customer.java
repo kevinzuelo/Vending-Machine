@@ -13,7 +13,7 @@ public class Customer {
         this.accountNumber = accountNumber;
     }
 
-    // Getters and setters
+    // Getters & setters
     public String getFirstName() {
         return firstName;
     }

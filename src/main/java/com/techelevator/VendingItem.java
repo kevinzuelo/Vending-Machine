@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class VendingItem {
 
     // Properties
+
     private String name;
     private double price;
     private String message;
@@ -20,7 +21,6 @@ public class VendingItem {
         this.name = name;
         this.price = price;
     }
-
     public VendingItem(String location, String name, double price, String type ){
         this.location = location;
         this.name = name;
@@ -28,29 +28,25 @@ public class VendingItem {
         this.type = type;
     }
 
-    // Getters and setters
+    // Getters & setters
 
     public String getName() {
         return name;
     }
-
     public double getPrice() {
         return price;
     }
-
     public String getMessage() {
         return message;
     }
-
     public String getType() {
         return type;
     }
-
     public String getLocation() {
         return location;
     }
 
-    // Other methods -- change message to fit VendingItem type somehow
+    // Other methods -- change message to fit each VendingItem type somehow
 
     public void getMessage(String type) {
 

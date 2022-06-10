@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Program {
@@ -8,6 +9,9 @@ public class Program {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+
+		// Create Sales Log
+
 
 		// Restock machine upon start up
 		Inventory inventory = new Inventory();

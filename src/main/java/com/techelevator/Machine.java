@@ -1,6 +1,9 @@
 package com.techelevator;
 
+import java.io.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Machine {
@@ -8,6 +11,8 @@ public class Machine {
     // Properties
     private Map<String, Queue> slots;
     private BigDecimal transactionBalance = BigDecimal.valueOf(0.00);
+    private final String PATH = System.getProperty("java.io.tmpdir") + "/SalesLog.txt";
+
 
     // Constructors
 
@@ -16,7 +21,6 @@ public class Machine {
     public Map<String, Queue> getSlots() {
         return slots;
     }
-
     public BigDecimal getTransactionBalance() {
         return transactionBalance;
     }
@@ -26,13 +30,14 @@ public class Machine {
     }
 // Other Methods
         // to add: vendItem(), update inputMoney / machineBalance
-    public VendingItem vendItem(String location) {
+    public VendingItem vendItem(String location) throws IOException {
         Queue<VendingItem> temp = slots.get(location);
             BigDecimal itemPrice = (temp.element().getPrice());
             transactionBalance = transactionBalance.subtract(itemPrice);
-            return (VendingItem)slots.get(location).poll();
 
+            printToLog(temp.element().getName() + " " + location +  " $" + itemPrice +  " $"  + transactionBalance);
 
+        return (VendingItem)slots.get(location).poll();
     }
     // Creates a new Inventory object
     public Map<String, Queue> fillMachine(String path){
@@ -51,13 +56,13 @@ public class Machine {
         return (VendingItem)slots.get(location).element();
     }
 
-    public void calculateChange(BigDecimal remainingBalance) {
+    public void calculateChange(BigDecimal remainingBalance) throws IOException {
         BigDecimal change = remainingBalance;
         int numberOfQuarters = 0;
         int numberOfNickels = 0;
         int numberOfDimes = 0;
 
-        for (BigDecimal i = change; i.compareTo(BigDecimal.valueOf(.25)) > 0 ; i = i.subtract(BigDecimal.valueOf(.25))) {
+        for (BigDecimal i = change; i.compareTo(BigDecimal.valueOf(.25)) >= 0 ; i = i.subtract(BigDecimal.valueOf(.25))) {
             numberOfQuarters++;
             change = change.subtract(BigDecimal.valueOf(.25));
         }
@@ -70,11 +75,28 @@ public class Machine {
             change = change.subtract(BigDecimal.valueOf(.05));
         }
 
+
         System.out.println("Your Change is: " + numberOfQuarters + " quarters");
         System.out.println("Your Change is: " + numberOfDimes + " dimes");
         System.out.println("Your Change is: " + numberOfNickels + " nickels");
 
+        setTransactionBalance(BigDecimal.valueOf(0));
 
+        // print moneys to log
+        printToLog(" GIVE CHANGE: $" + getTransactionBalance() + " $" + change);
+    }
+
+    public void printToLog(String message) throws IOException {
+        File salesLog = new File(PATH);
+            try (PrintWriter logWriter = new PrintWriter(new FileWriter(salesLog, true))) {
+                String newLine = (LocalDateTime.now().format(DateTimeFormatter.ofPattern("\n MM/dd/yyyy HH:mm:ss a")) + " " + message);
+                logWriter.append(newLine);
+            } catch (FileNotFoundException e) {
+
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
 }

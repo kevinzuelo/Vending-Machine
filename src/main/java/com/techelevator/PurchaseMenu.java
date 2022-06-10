@@ -1,12 +1,23 @@
 package com.techelevator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 public class PurchaseMenu extends Menu{
 
     // Properties
     private String location;
+    private static final String PATH = System.getProperty("java.io.tmpdir") + "/SalesLog.txt";
+    public static File salesLog = new File(PATH);
+
+
     // Constructors
 
     // Getters & setters
@@ -21,6 +32,11 @@ public class PurchaseMenu extends Menu{
                 currentMachine.setTransactionBalance(numberOfDollars);
                 System.out.println("Current amount provided: $ " + numberOfDollars);
                 System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance());
+
+                // Print money added to log
+                currentMachine.printToLog(" FEED MONEY: $" + numberOfDollars + " $" + currentMachine.getTransactionBalance());
+
+
                 System.out.println();
                 displayMenu();
                 System.out.print("Make a choice: ");
@@ -61,6 +77,8 @@ public class PurchaseMenu extends Menu{
         }
         catch (NoSuchElementException e) {
 
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     @Override

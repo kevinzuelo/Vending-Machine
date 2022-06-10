@@ -30,9 +30,30 @@ public class Machine {
         return inputMoney;
     }
 
-    // Other Methods
-        // to add: vendItem(), update inputMoney / machineBalance
+    public void setMachineBalance(double machineBalance) {
+        this.machineBalance = machineBalance;
+    }
 
+    public void setInputMoney(double inputMoney) {
+        this.inputMoney += inputMoney;
+    }
+// Other Methods
+        // to add: vendItem(), update inputMoney / machineBalance
+    public VendingItem vendItem(String location) {
+
+
+
+
+
+
+
+
+
+
+        Object object = slots.get(location).poll();
+        VendingItem vendedItem = new VendingItem();
+        return vendedItem;
+    }
     // Creates a new Inventory object
     public Map<String, Queue> fillMachine(String path){
        Inventory inventory = new Inventory();

@@ -26,7 +26,8 @@ public class Program {
 		PurchaseMenu purchaseMenu = new PurchaseMenu();
 		System.out.print("Make a choice: ");
 		int purchaseChoice = Integer.parseInt(scanner.nextLine());
-		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots());
+		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
+
 
 
 		// Prompt user for account number

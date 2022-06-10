@@ -1,6 +1,5 @@
 package com.techelevator;
 
-import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
@@ -20,9 +19,9 @@ public class PurchaseMenu extends Menu{
 
                 System.out.print("Enter amount of dollars: ");
                 double numberOfDollars = Double.parseDouble(inputScanner.nextLine());
-                currentMachine.setInputMoney(numberOfDollars);
+                currentMachine.setTransactionBalance(numberOfDollars);
                 System.out.println("Current amount provided: $ " + numberOfDollars);
-                System.out.println("Machine Balance: $ " + currentMachine.getInputMoney());
+                System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance());
                 System.out.println();
                 displayMenu();
                 System.out.print("Make a choice: ");
@@ -35,7 +34,8 @@ public class PurchaseMenu extends Menu{
                     System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || " + queue.element().getPrice() + " || Quantity Remaining: " + queue.size());
                 }
                 System.out.print("Choose Item Location: ");
-                 location = inputScanner.nextLine().toLowerCase();
+                 location = inputScanner.nextLine();
+                System.out.println(currentMachine.vendItem(location).getName() + " Updated Balance: " + currentMachine.getTransactionBalance());
             } else if (choice == 3) {
                 System.exit(0);
             } else {

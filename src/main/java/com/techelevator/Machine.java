@@ -1,7 +1,5 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Machine {
@@ -10,8 +8,7 @@ public class Machine {
 
     private int quantityRemaining;
     private Map<String, Queue> slots;
-    private double machineBalance;
-    private double inputMoney;
+    private double transactionBalance;
 
     // Constructors
 
@@ -23,36 +20,23 @@ public class Machine {
     public Map<String, Queue> getSlots() {
         return slots;
     }
-    public double getMachineBalance() {
-        return machineBalance;
-    }
-    public double getInputMoney() {
-        return inputMoney;
+
+    public double getTransactionBalance() {
+        return transactionBalance;
     }
 
-    public void setMachineBalance(double machineBalance) {
-        this.machineBalance = machineBalance;
-    }
-
-    public void setInputMoney(double inputMoney) {
-        this.inputMoney += inputMoney;
+    public void setTransactionBalance(double transactionBalance) {
+        this.transactionBalance += transactionBalance;
     }
 // Other Methods
         // to add: vendItem(), update inputMoney / machineBalance
     public VendingItem vendItem(String location) {
+        Queue<VendingItem> temp = slots.get(location);
 
+        double itemPrice = temp.element().getPrice();
+        transactionBalance -= itemPrice;
 
-
-
-
-
-
-
-
-
-        Object object = slots.get(location).poll();
-        VendingItem vendedItem = new VendingItem();
-        return vendedItem;
+        return (VendingItem)slots.get(location).poll();
     }
     // Creates a new Inventory object
     public Map<String, Queue> fillMachine(String path){

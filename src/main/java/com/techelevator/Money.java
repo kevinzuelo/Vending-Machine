@@ -1,6 +1,6 @@
 package com.techelevator;
 
-public class BankAccount {
+public class Money {
 
     // Properties
     private double balance;

@@ -34,14 +34,16 @@ public class Machine {
         // to add: vendItem(), update inputMoney / machineBalance
 
     // Creates a new Inventory object
-    public void fillMachine(String path){
+    public Map<String, Queue> fillMachine(String path){
        Inventory inventory = new Inventory();
        inventory.getInventory(path);
        // Places each queue (group of 5 snacks) into the map. Key is the slot location, value is the queue
-       Map<String, Queue> myMap = new HashMap<>();
+        Map<String, Queue> myMap = new HashMap<>();
         for (Queue<VendingItem> queue : inventory.getQueues()) {
             myMap.put(queue.element().getLocation(), queue);
-        }
+
+        }slots = myMap;
+        return slots;
     }
 
 //    public String getMachineContents() {

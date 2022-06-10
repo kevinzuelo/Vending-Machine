@@ -18,13 +18,16 @@ public class Program {
 		// Display Main Menu options
 		MainMenu mainMenu = new MainMenu();
 		mainMenu.displayMenu();
-		mainMenu.setChoice(Integer.parseInt(scanner.nextLine()));
+		int setChoice = Integer.parseInt(scanner.nextLine());
+		mainMenu.choiceResponse(setChoice, vendingMachine.getSlots());
 
 		// Display Purchase Menu options
 		System.out.println();
 		PurchaseMenu purchaseMenu = new PurchaseMenu();
-		purchaseMenu.displayMenu();
-		purchaseMenu.setChoice(Integer.parseInt(scanner.nextLine()));
+		System.out.print("Make a choice: ");
+		int purchaseChoice = Integer.parseInt(scanner.nextLine());
+		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots());
+
 
 		// Prompt user for account number
 		// Prompt for how much money they want to add (whole dollar amounts)

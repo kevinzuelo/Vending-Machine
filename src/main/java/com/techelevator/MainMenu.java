@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 public class MainMenu extends Menu{
@@ -13,23 +14,24 @@ public class MainMenu extends Menu{
     // Other methods
 
     // Method for menu choice response
-    public void choiceResponse() {
-        if (getChoice() == 1) {
+    public void choiceResponse(int choice, Map<String, Queue>stockedMachine) {
+        if (choice == 1) {
 
-    // display all items including quantity remaining
-//            Inventory inventory = new Inventory();
-//            Queue<VendingItem> queue = inventory.getQueues();
+        for(Queue <VendingItem> queue : stockedMachine.values()){
+            System.out.println(queue.element().getLocation() + " || " + queue.element().getName() +  " || " + queue.element().getPrice() + " || Quantity Remaining: " + queue.size());
+
         }
-        else if (getChoice() == 2) {
+        }
+        else if (choice == 2) {
             PurchaseMenu purchaseMenu = new PurchaseMenu();
             purchaseMenu.displayMenu();
         }
-        else if (getChoice() == 3) {
+        else if (choice == 3) {
             System.exit(0);
         }
         else {
             System.out.println("Invalid choice. Please enter 1, 2, or 3!");
-            choiceResponse();
+            return;
         }
     }
 
@@ -39,7 +41,8 @@ public class MainMenu extends Menu{
         System.out.println("(2) Purchase");
         System.out.println("(3) Exit");
         System.out.println();
-        System.out.print("Make a choice : ");
+        System.out.print("Make a choice: ");
+
     }
 
 }

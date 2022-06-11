@@ -23,35 +23,36 @@ public class Program {
 		vendingMachine.fillMachine(path);
 
 		// Display Main Menu options
+		boolean isInvalidMain = true;
+		do {
 			MainMenu mainMenu = new MainMenu();
 			mainMenu.displayMenu();
-			setChoice = Integer.parseInt(scanner.nextLine());
-			mainMenu.choiceResponse(setChoice, vendingMachine.getSlots(), vendingMachine);
+			try {
+				setChoice = Integer.parseInt(scanner.nextLine());
+				mainMenu.choiceResponse(setChoice, vendingMachine.getSlots(), vendingMachine);
+				isInvalidMain = false;
+			} catch (NumberFormatException e) {
+				isInvalidMain = true;
+				System.out.println("Invalid input. Please enter a valid choice.");
+			}
+		}
+		while (isInvalidMain = true);
 
 		// Display Purchase Menu options
 		System.out.println();
 		System.out.print("Please choose a menu option: ");
-		purchaseChoice = Integer.parseInt(scanner.nextLine());
-		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
 
+		boolean isInvalidPurchase = true;
+//		do {
+			try {
+				purchaseChoice = Integer.parseInt(scanner.nextLine());
+				purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
+			} catch (NumberFormatException e) {
+				isInvalidPurchase = true;
+				System.out.println("Invalid input. Please enter a valid choice.");
+			}
 
-
-		// Prompt user for account number
-		// Prompt for how much money they want to add (whole dollar amounts)
-		// Greet customer and display how much money they've added (inputMoney)
-
-		// Display all products
-
-		// Prompt customer to choose a slot
-
-		// Dispense item. Show name, cost, and yum yum message.
-		// Display customer's updated balance
-
-		// Options: Return to main menu? Or ask them if they want to make another purchase?
-
-		// If they're finished, print transactions to Sales Log
-		// Give customer their change
-
+//		while (isInvalidPurchase = true) ;
 
 		scanner.close();
 	}

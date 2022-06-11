@@ -59,7 +59,12 @@ public class PurchaseMenu extends Menu{
                     }
                 }
                 System.out.print("Choose Item Location: ");
-                 location = inputScanner.nextLine();
+                try {
+                    location = inputScanner.nextLine().toUpperCase();
+                }
+                catch (Exception e) {
+                    System.out.println("Invalid choice, choose item location.");
+                }
 
                  if(currentMachine.getFirstItem(location).getPrice().compareTo(currentMachine.getTransactionBalance()) > 0) {
                      System.out.println("\nInsufficient funds, please insert more money.");
@@ -77,7 +82,6 @@ public class PurchaseMenu extends Menu{
                      int newChoice = inputScanner.nextInt();
                      choiceResponse(newChoice, stockedItems, currentMachine);
                  }
-
             } else if (choice == 3) {
                 MainMenu mainMenu = new MainMenu();
                 currentMachine.calculateChange(currentMachine.getTransactionBalance());

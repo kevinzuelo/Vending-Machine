@@ -71,6 +71,10 @@ public class PurchaseMenu extends Menu{
 
             } else if (choice == 3) {
                 currentMachine.calculateChange(currentMachine.getTransactionBalance());
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.displayMenu();
+                int newChoice = inputScanner.nextInt();
+                mainMenu.choiceResponse(newChoice, stockedItems);
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
                 return;

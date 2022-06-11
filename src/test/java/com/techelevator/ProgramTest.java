@@ -1,4 +1,4 @@
-package com.techelevator.view;
+package com.techelevator;
 
 import org.junit.Assert;
 import org.junit.Before;

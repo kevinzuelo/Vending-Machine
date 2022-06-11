@@ -28,7 +28,7 @@ public class Program {
 		// Display Purchase Menu options
 		System.out.println();
 		PurchaseMenu purchaseMenu = new PurchaseMenu();
-		System.out.print("Make a choice: ");
+		System.out.print("Please choose a menu option: ");
 		int purchaseChoice = Integer.parseInt(scanner.nextLine());
 		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
 

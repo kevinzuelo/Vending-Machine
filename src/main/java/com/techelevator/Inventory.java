@@ -49,7 +49,7 @@ public class Inventory {
                 queues.add(newLinkedList);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Go fish");
+            System.out.println("Input a valid inventory file.");
         }
     }
 

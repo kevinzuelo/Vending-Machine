@@ -44,7 +44,7 @@ public class Machine {
        Inventory inventory = new Inventory();
        inventory.getInventory(path);
        // Places each queue (group of 5 snacks) into the map. Key is the slot location, value is the queue
-        Map<String, Queue> myMap = new HashMap<>();
+        Map<String, Queue> myMap = new LinkedHashMap<>();
         for (Queue<VendingItem> queue : inventory.getQueues()) {
             myMap.put(queue.element().getLocation(), queue);
         }
@@ -76,12 +76,9 @@ public class Machine {
         }
 
 
-        System.out.println("Your Change is: " + numberOfQuarters + " quarters");
-        System.out.println("Your Change is: " + numberOfDimes + " dimes");
-        System.out.println("Your Change is: " + numberOfNickels + " nickels");
-
+        System.out.println("Dispensing change. You received " + numberOfQuarters + " quarter(s), " + numberOfDimes + " dime(s), and " + numberOfNickels + " nickel(s).");
+        System.out.println("Thank you for your purchase. Returning to Main Menu.");
         setTransactionBalance(BigDecimal.valueOf(0));
-
         // print moneys to log
         printToLog(" GIVE CHANGE: $" + getTransactionBalance() + " $" + change);
     }

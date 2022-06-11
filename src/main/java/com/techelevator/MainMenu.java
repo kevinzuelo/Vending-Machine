@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -19,7 +21,7 @@ public class MainMenu extends Menu{
         Scanner inputScanner = new Scanner(System.in);
             if (choice == 1) {
                 for (Queue<VendingItem> queue :  stockedItems.values()) {
-                    System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || " + queue.element().getPrice() + " || Quantity Remaining: " + queue.size());
+                    System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
                 }
                 displayMenu();
                 int newChoice = inputScanner.nextInt();
@@ -28,6 +30,7 @@ public class MainMenu extends Menu{
                 PurchaseMenu purchaseMenu = new PurchaseMenu();
                 purchaseMenu.displayMenu();
             } else if (choice == 3) {
+                System.out.println("\nExiting Vending Machine.  Have a great day!");
                 System.exit(0);
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
@@ -41,9 +44,7 @@ public class MainMenu extends Menu{
         System.out.println("\n(1) Display Vending Machine Items");
         System.out.println("(2) Purchase");
         System.out.println("(3) Exit");
-        System.out.println();
-        System.out.print("Make a choice: ");
-
+        System.out.print("\nPlease choose a menu option: ");
     }
 
 }

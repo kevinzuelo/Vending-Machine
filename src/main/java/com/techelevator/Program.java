@@ -9,6 +9,9 @@ public class Program {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+		PurchaseMenu purchaseMenu = new PurchaseMenu();
+		int setChoice = 0;
+		int purchaseChoice = 0;
 
 		// Create Sales Log
 
@@ -20,17 +23,16 @@ public class Program {
 		vendingMachine.fillMachine(path);
 
 		// Display Main Menu options
-		MainMenu mainMenu = new MainMenu();
-		mainMenu.displayMenu();
-		int setChoice = Integer.parseInt(scanner.nextLine());
-		mainMenu.choiceResponse(setChoice, vendingMachine.getSlots());
+			MainMenu mainMenu = new MainMenu();
+			mainMenu.displayMenu();
+			setChoice = Integer.parseInt(scanner.nextLine());
+			mainMenu.choiceResponse(setChoice, vendingMachine.getSlots());
 
 		// Display Purchase Menu options
 		System.out.println();
-		PurchaseMenu purchaseMenu = new PurchaseMenu();
 		System.out.print("Please choose a menu option: ");
-		int purchaseChoice = Integer.parseInt(scanner.nextLine());
-		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
+		purchaseChoice = Integer.parseInt(scanner.nextLine());
+		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine, mainMenu);
 
 
 

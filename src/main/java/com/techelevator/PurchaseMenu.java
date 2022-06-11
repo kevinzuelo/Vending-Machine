@@ -25,7 +25,7 @@ public class PurchaseMenu extends Menu{
     // Getters & setters
 
     // Other methods
-    public void choiceResponse(int choice, Map<String, Queue> stockedItems, Machine currentMachine) {
+    public void choiceResponse(int choice, Map<String, Queue> stockedItems, Machine currentMachine, MainMenu mainMenu) {
         try (Scanner inputScanner = new Scanner(System.in)) {
             if (choice == 1) {
 
@@ -38,12 +38,11 @@ public class PurchaseMenu extends Menu{
                 // Print money added to log
                 currentMachine.printToLog(" FEED MONEY: $" + numberOfDollars + " $" + currentMachine.getTransactionBalance());
 
-
                 System.out.println();
                 displayMenu();
                 System.out.print("Choose another menu option: ");
                 int newChoice = inputScanner.nextInt();
-                choiceResponse(newChoice, stockedItems, currentMachine);
+                choiceResponse(newChoice, stockedItems, currentMachine, mainMenu);
 
 
             } else if (choice == 2) {
@@ -67,7 +66,7 @@ public class PurchaseMenu extends Menu{
                      displayMenu();
                      System.out.print("Choose another menu option: ");
                      int newChoice = inputScanner.nextInt();
-                     choiceResponse(newChoice, stockedItems, currentMachine);
+                     choiceResponse(newChoice, stockedItems, currentMachine, mainMenu);
                  }
                  else {
                      VendingItem thisItem = currentMachine.vendItem(location);
@@ -76,15 +75,15 @@ public class PurchaseMenu extends Menu{
                      displayMenu();
                      System.out.print("Choose another menu option: ");
                      int newChoice = inputScanner.nextInt();
-                     choiceResponse(newChoice, stockedItems, currentMachine);
+                     choiceResponse(newChoice, stockedItems, currentMachine, mainMenu);
                  }
 
             } else if (choice == 3) {
                 currentMachine.calculateChange(currentMachine.getTransactionBalance());
-                MainMenu mainMenu = new MainMenu();
                 mainMenu.displayMenu();
                 int newChoice = inputScanner.nextInt();
                 mainMenu.choiceResponse(newChoice, stockedItems);
+                System.out.println("TEST");
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
                 return;

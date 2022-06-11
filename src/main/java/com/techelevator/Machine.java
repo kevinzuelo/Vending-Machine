@@ -26,7 +26,7 @@ public class Machine {
     }
 
     public void setTransactionBalance(BigDecimal transactionBalance) {
-        this.transactionBalance = this.transactionBalance.add(transactionBalance);
+        this.transactionBalance = transactionBalance;
     }
 // Other Methods
         // to add: vendItem(), update inputMoney / machineBalance
@@ -74,7 +74,6 @@ public class Machine {
             numberOfNickels++;
             change = change.subtract(BigDecimal.valueOf(.05));
         }
-
 
         System.out.println("Dispensing change. You received " + numberOfQuarters + " quarter(s), " + numberOfDimes + " dime(s), and " + numberOfNickels + " nickel(s).");
         System.out.println("Thank you for your purchase. Returning to Main Menu.");

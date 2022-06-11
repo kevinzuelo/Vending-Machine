@@ -26,13 +26,13 @@ public class Program {
 			MainMenu mainMenu = new MainMenu();
 			mainMenu.displayMenu();
 			setChoice = Integer.parseInt(scanner.nextLine());
-			mainMenu.choiceResponse(setChoice, vendingMachine.getSlots());
+			mainMenu.choiceResponse(setChoice, vendingMachine.getSlots(), vendingMachine);
 
 		// Display Purchase Menu options
 		System.out.println();
 		System.out.print("Please choose a menu option: ");
 		purchaseChoice = Integer.parseInt(scanner.nextLine());
-		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine, mainMenu);
+		purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
 
 
 

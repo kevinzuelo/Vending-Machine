@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class MainMenu extends Menu{
     // Properties
 
+
     // Constructors
 
     // Getters & setters
@@ -17,18 +18,22 @@ public class MainMenu extends Menu{
     // Other methods
 
     // Method for menu choice response
-    public void choiceResponse(int choice, Map<String, Queue> stockedItems) {
-        Scanner inputScanner = new Scanner(System.in);
+    public void choiceResponse(int choice, Map<String, Queue> stockedItems, Machine currentMachine) {
+       Scanner inputScanner = new Scanner(System.in) ;
             if (choice == 1) {
-                for (Queue<VendingItem> queue :  stockedItems.values()) {
+                for (Queue<VendingItem> queue : stockedItems.values()) {
                     System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
                 }
                 displayMenu();
                 int newChoice = inputScanner.nextInt();
-                choiceResponse(newChoice, stockedItems);
+                choiceResponse(newChoice, stockedItems, currentMachine);
             } else if (choice == 2) {
                 PurchaseMenu purchaseMenu = new PurchaseMenu();
                 purchaseMenu.displayMenu();
+                System.out.print("Please choose a menu option: ");
+                choice = Integer.parseInt(inputScanner.nextLine());
+                purchaseMenu.choiceResponse(choice, stockedItems, currentMachine);
+
             } else if (choice == 3) {
                 System.out.println("\nExiting Vending Machine.  Have a great day!");
                 System.exit(0);
@@ -36,7 +41,6 @@ public class MainMenu extends Menu{
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
                 return;
             }
-
     }
 
     @Override

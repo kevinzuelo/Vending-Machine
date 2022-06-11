@@ -17,6 +17,7 @@ public class PurchaseMenu extends Menu{
     private String location;
     private static final String PATH = System.getProperty("java.io.tmpdir") + "/SalesLog.txt";
     public static File salesLog = new File(PATH);
+    private VendingItem oneLeft = new VendingItem();
 
 
     // Constructors
@@ -47,7 +48,16 @@ public class PurchaseMenu extends Menu{
 
             } else if (choice == 2) {
                 for (Queue<VendingItem> queue : stockedItems.values()) {
-                    System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                    if(queue.size() == 1) {
+                        oneLeft = queue.element();
+                        System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                    }
+                    else if(queue.size() == 0) {
+                        System.out.println(oneLeft.getLocation() + " || " + oneLeft.getName() + " || $" + oneLeft.getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + "SOLD OUT");
+                    }
+                    else {
+                        System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                    }
                 }
                 System.out.print("Choose Item Location: ");
                  location = inputScanner.nextLine();

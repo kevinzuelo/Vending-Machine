@@ -18,6 +18,8 @@ public class VendingItem {
 
     // Constructors
 
+    public VendingItem() {
+    }
     public VendingItem(String name, double price) {
         this.name = name;
         this.price = BigDecimal.valueOf(price);

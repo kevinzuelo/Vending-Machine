@@ -18,7 +18,7 @@ public class PurchaseMenu extends Menu{
     private static final String PATH = System.getProperty("java.io.tmpdir") + "/SalesLog.txt";
     public static File salesLog = new File(PATH);
     private VendingItem oneLeft = new VendingItem();
-
+    private Inventory inventory = new Inventory();
 
     // Constructors
 
@@ -59,12 +59,13 @@ public class PurchaseMenu extends Menu{
                     }
                 }
                 System.out.print("Choose Item Location: ");
-                try {
+
                     location = inputScanner.nextLine().toUpperCase();
-                }
-                catch (Exception e) {
-                    System.out.println("Invalid choice, choose item location.");
-                }
+                    inventory.getInventory();
+                    if (!inventory.getItemListLocations().contains(location.toUpperCase())) {
+                        System.out.println("Invalid choice. Please choose an item location:");
+                        choiceResponse(choice, stockedItems, currentMachine);
+                    }
 
                  if(currentMachine.getFirstItem(location).getPrice().compareTo(currentMachine.getTransactionBalance()) > 0) {
                      System.out.println("\nInsufficient funds, please insert more money.");

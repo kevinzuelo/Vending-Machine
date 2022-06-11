@@ -16,13 +16,8 @@ public class Inventory {
 
     // Getters & setters
 
-    public List<String> getItemListLocations() {
-        List<String> itemLocationList = new ArrayList<>();
-
-        for (VendingItem item : itemList) {
-            itemLocationList.add(item.getLocation());
-        }
-        return itemLocationList;
+    public List<VendingItem> getItemList() {
+        return itemList;
     }
 
     public List<Queue> getQueues() {

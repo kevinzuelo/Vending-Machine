@@ -18,7 +18,6 @@ public class PurchaseMenu extends Menu{
     private static final String PATH = System.getProperty("java.io.tmpdir") + "/SalesLog.txt";
     public static File salesLog = new File(PATH);
     private VendingItem oneLeft = new VendingItem();
-    private Inventory inventory = new Inventory();
 
     // Constructors
 
@@ -29,20 +28,24 @@ public class PurchaseMenu extends Menu{
         try (Scanner inputScanner = new Scanner(System.in)) {
             if (choice == 1) {
 
-                System.out.print("\nEnter amount of dollars: ");
-                BigDecimal numberOfDollars = BigDecimal.valueOf(Double.parseDouble(inputScanner.nextLine()));
-                currentMachine.setTransactionBalance(numberOfDollars);
-                System.out.println("\nCurrent amount provided: $ " + numberOfDollars.setScale(2, RoundingMode.CEILING));
-                System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
+                try {
+                    System.out.print("\nEnter amount of dollars: ");
+                    BigDecimal numberOfDollars = BigDecimal.valueOf(Double.parseDouble(inputScanner.nextLine()));
+                    currentMachine.setTransactionBalance(numberOfDollars);
+                    System.out.println("\nCurrent amount provided: $ " + numberOfDollars.setScale(2, RoundingMode.CEILING));
+                    System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
 
-                // Print money added to log
-                currentMachine.printToLog(" FEED MONEY: $" + numberOfDollars + " $" + currentMachine.getTransactionBalance());
+                    // Print money added to log
+                    currentMachine.printToLog(" FEED MONEY: $" + numberOfDollars + " $" + currentMachine.getTransactionBalance());
 
-                System.out.println();
-                displayMenu();
-                System.out.print("Choose another menu option: ");
-                int newChoice = inputScanner.nextInt();
-                choiceResponse(newChoice, stockedItems, currentMachine);
+                    System.out.println();
+                    displayMenu();
+                    System.out.print("Choose another menu option: ");
+                    int newChoice = inputScanner.nextInt();
+                    choiceResponse(newChoice, stockedItems, currentMachine);
+                } catch (NumberFormatException | InputMismatchException e) {
+                    System.out.println("Please enter a valid dollar amount.");
+                }
 
 
             } else if (choice == 2) {
@@ -61,9 +64,9 @@ public class PurchaseMenu extends Menu{
                 System.out.print("Choose Item Location: ");
 
                     location = inputScanner.nextLine().toUpperCase();
-                    inventory.getInventory();
-                    if (!inventory.getItemListLocations().contains(location.toUpperCase())) {
-                        System.out.println("Invalid choice. Please choose an item location:");
+
+                    if (!stockedItems.containsKey(location.toUpperCase())) {
+                        System.out.println("\nInvalid choice, try again. \n");
                         choiceResponse(choice, stockedItems, currentMachine);
                     }
 

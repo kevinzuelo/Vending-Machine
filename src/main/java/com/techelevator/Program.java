@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.io.File;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Program {
@@ -33,6 +34,9 @@ public class Program {
 				isInvalidMain = false;
 			} catch (NumberFormatException e) {
 				isInvalidMain = true;
+				System.out.println("Invalid input. Please enter a valid choice.");
+			}
+			catch (InputMismatchException e) {
 				System.out.println("Invalid input. Please enter a valid choice.");
 			}
 		}

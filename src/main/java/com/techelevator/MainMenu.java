@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class MainMenu extends Menu{
     // Properties
 
+
     // Constructors
 
     // Getters & setters
@@ -22,7 +23,7 @@ public class MainMenu extends Menu{
               // Displays entire inventory with quantities remaining
               if (choice == 1) {
                 for (Queue<VendingItem> queue : stockedItems.values()) {
-                    System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                    System.out.println(ANSI_BLUE + queue.element().getLocation() + ANSI_RESET + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || QTY Remaining: " + queue.size());
                 }
                 displayMenu();
                 int newChoice = inputScanner.nextInt();
@@ -37,21 +38,26 @@ public class MainMenu extends Menu{
                         purchaseMenu.choiceResponse(choice, stockedItems, currentMachine);
                     }
                     catch (Exception e) {
-                        System.out.println("Invalid input. Please enter a valid choice.");
+                        System.out.println(ANSI_RED + "\nInvalid input. Please enter a valid choice." + ANSI_RED);
                         choiceResponse(choice, stockedItems, currentMachine);
                     }
               // Exits machine and terminates program
             } else if (choice == 3) {
-                System.out.println("\nExiting Vending Machine.  Have a great day!");
+                System.out.println(ANSI_RED + "\nExiting Vending Machine.  Have a great day!" + ANSI_RESET);
                 System.exit(0);
             } else {
-                System.out.println("Invalid choice. Please enter 1, 2, or 3!");
+                System.out.println(ANSI_RED + "\nInvalid choice. Please enter 1, 2, or 3!" + ANSI_RESET);
              }
     }
 
     // Display options for Main Menu
     @Override
     public void displayMenu() {
+        System.out.println( ANSI_RED +
+                "  _   _   _   _     _   _   _   _  \n" +
+                " / \\ / \\ / \\ / \\   / \\ / \\ / \\ / \\ \n" +
+                "( " + ANSI_RESET + "M   A   I   N " + ANSI_RED + ") ( " + ANSI_RESET + "M   E   N   U " + ANSI_RED + ")\n" +
+                " \\_/ \\_/ \\_/ \\_/   \\_/ \\_/ \\_/ \\_/ " + ANSI_RESET);
         System.out.println("\n(1) Display Vending Machine Items");
         System.out.println("(2) Purchase");
         System.out.println("(3) Exit");

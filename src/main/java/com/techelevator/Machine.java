@@ -12,6 +12,10 @@ public class Machine {
     private Map<String, Queue> slots;
     private BigDecimal transactionBalance = BigDecimal.valueOf(0.00);
     private final String PATH = System.getProperty("java.io.tmpdir") + "/SalesLog.txt";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m\t";
+    public static final String ANSI_BLUE = "\u001B[34m";
+
 
     // Constructors
 
@@ -76,8 +80,8 @@ public class Machine {
             numberOfNickels++;
             change = change.subtract(BigDecimal.valueOf(.05));
         }
-        System.out.println("Dispensing change. You received " + numberOfQuarters + " quarter(s), " + numberOfDimes + " dime(s), and " + numberOfNickels + " nickel(s).");
-        System.out.println("Thank you for your purchase. Returning to Main Menu.");
+        System.out.println(ANSI_GREEN + "\nDispensing change. You received " + numberOfQuarters + " quarter(s), " + numberOfDimes + " dime(s), and " + numberOfNickels + " nickel(s)." + ANSI_RESET);
+        System.out.println(ANSI_BLUE + "Thank you for your purchase. Returning to Main Menu." + ANSI_RESET);
 
         // Prints change amount given to Sales Log
         printToLog(" GIVE CHANGE: $" + getTransactionBalance() + " $" + change);

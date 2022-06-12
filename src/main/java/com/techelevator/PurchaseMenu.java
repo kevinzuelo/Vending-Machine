@@ -19,7 +19,7 @@ public class PurchaseMenu extends Menu{
     // Getters & setters
 
     // Other methods
-    public void choiceResponse(int choice, Map<String, Queue> stockedItems, Machine currentMachine) {
+    public void choiceResponse(int choice, Map<String, Queue> stockedItems, Machine currentMachine) throws NoSuchElementException{
         try (Scanner inputScanner = new Scanner(System.in)) {
             // Feed Money option
             if (choice == 1) {
@@ -29,11 +29,11 @@ public class PurchaseMenu extends Menu{
                     BigDecimal zeroDollars = BigDecimal.valueOf(0);
                     if (numberOfDollars.compareTo(zeroDollars) > 0) {
                         currentMachine.setTransactionBalance(numberOfDollars);
-                        System.out.println("\nCurrent amount provided: $ " + numberOfDollars.setScale(2, RoundingMode.CEILING));
-                        System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
+                        System.out.println(ANSI_GREEN + "\nCurrent amount provided: $ " + numberOfDollars.setScale(2, RoundingMode.CEILING));
+                        System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING) + ANSI_RESET);
                     }
                     else {
-                        System.out.println("Please enter a positive dollar amount!");
+                        System.out.println(ANSI_RED + "\nPlease enter a positive dollar amount!" + ANSI_RESET);
                     }
 
                     // Amount of money fed to machine added to Sales Log
@@ -44,10 +44,10 @@ public class PurchaseMenu extends Menu{
                     choice = inputScanner.nextInt();
                     choiceResponse(choice, stockedItems, currentMachine);
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a valid dollar amount.");
+                    System.out.println(ANSI_RED + "\nPlease enter a valid dollar amount." + ANSI_RESET);
                     choiceResponse(choice, stockedItems, currentMachine);
                 } catch (Exception e) {
-                    System.out.println("Error please try again");
+                    System.out.println(ANSI_RED + "\nError, please try again." + ANSI_RESET);
                     choiceResponse(choice, stockedItems, currentMachine);
                 }
               // Purchase option: shows inventory list with quantities remaining
@@ -56,14 +56,14 @@ public class PurchaseMenu extends Menu{
                         // If there is only one item left of a particular item, that item gets temporarily saved to the oneLeft variable
                         if(queue.size() == 1) {
                             oneLeft = queue.element();
-                            System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                            System.out.println(ANSI_BLUE + queue.element().getLocation() +ANSI_RESET+ " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
                         }
                         // If user attempts to purchase an item after it is depleted, display sold out message
                         else if(queue.size() == 0) {
-                            System.out.println(oneLeft.getLocation() + " || " + oneLeft.getName() + " || $" + oneLeft.getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + "SOLD OUT");
+                            System.out.println(ANSI_BLUE+ oneLeft.getLocation() +ANSI_RESET+ " || " + oneLeft.getName() + " || $" + oneLeft.getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + "SOLD OUT");
                         }
                         else {
-                            System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                            System.out.println(ANSI_BLUE+ queue.element().getLocation() +ANSI_RESET+ " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
                         }
                     }
                     System.out.print("Choose Item Location: ");
@@ -71,12 +71,12 @@ public class PurchaseMenu extends Menu{
                         location = inputScanner.nextLine().toUpperCase();
                         // Give error if they put in an invalid item location
                         if (!stockedItems.containsKey(location.toUpperCase())) {
-                            System.out.println("\nInvalid choice, try again. \n");
+                            System.out.println(ANSI_RED + "\nInvalid choice, try again. \n" + ANSI_RESET);
                             choiceResponse(choice, stockedItems, currentMachine);
                         }
                         // Give error if they don't have enough money to purchase item. Shows inventory list again.
                         if (currentMachine.getFirstItem(location).getPrice().compareTo(currentMachine.getTransactionBalance()) > 0) {
-                         System.out.println("\nInsufficient funds, please insert more money.");
+                         System.out.println(ANSI_RED + "\nInsufficient funds, please insert more money." + ANSI_RESET);
                          displayMenu();
                          System.out.print("Choose another menu option: ");
                          choice = inputScanner.nextInt();
@@ -85,8 +85,8 @@ public class PurchaseMenu extends Menu{
                         // Vends item and displays name, price, special message, and remaining balance in machine
                         else {
                          VendingItem thisItem = currentMachine.vendItem(location);
-                         System.out.println("\nThe machine dispensed " + thisItem.getName() + "! \nCost: $" + thisItem.getPrice().setScale(2, RoundingMode.CEILING) + " \n***** " + thisItem.printMessage() + " *****\n" +
-                                 "Your remaining balance is: $" + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
+                         System.out.println(ANSI_BLUE+ "\nThe machine dispensed " + thisItem.getName() + "!"+ANSI_RESET+ANSI_GREEN+"\nCost: $" + thisItem.getPrice().setScale(2, RoundingMode.CEILING) +ANSI_BLUE+ " \n***** " + thisItem.printMessage() + " *****\n" +
+                                 ANSI_GREEN+ "\nYour remaining balance is: $" + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING)+ANSI_RESET);
                          displayMenu();
                          // Returns to Purchase Menu
                          System.out.print("Choose another menu option: ");
@@ -103,12 +103,15 @@ public class PurchaseMenu extends Menu{
                 choice = inputScanner.nextInt();
                 mainMenu.choiceResponse(choice, stockedItems, currentMachine);
             } else {
-                System.out.println("Invalid choice. Please enter 1, 2, or 3!");
-                return;
+                try {
+                    System.out.println(ANSI_RED + "\nInvalid choice. Please enter 1, 2, or 3!" + ANSI_RESET);
+                    return;
+                }
+                catch (NoSuchElementException e) {
+                }
             }
         }
         catch (NoSuchElementException e) {
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -118,11 +121,15 @@ public class PurchaseMenu extends Menu{
     // Display options for Purchase Menu
     @Override
     public void displayMenu() {
+        System.out.println(ANSI_YELLOW + "\n" +
+                "  _   _   _   _   _   _   _   _     _   _   _   _  \n" +
+                " / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\   / \\ / \\ / \\ / \\ \n" +
+                "( " + ANSI_RESET + "P   U   R   C   H   A   S   E" + ANSI_YELLOW + " ) ( " + ANSI_RESET + "M   E   N   U " + ANSI_YELLOW + ")\n" +
+                " \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/   \\_/ \\_/ \\_/ \\_/ " + ANSI_RESET);
         System.out.println("\n(1) Feed Money");
         System.out.println("(2) Select Product");
         System.out.println("(3) Finish Transaction");
         System.out.println();
-
     }
 
 }

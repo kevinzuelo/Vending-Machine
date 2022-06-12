@@ -1,6 +1,5 @@
 package com.techelevator;
 
-import java.io.File;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -32,31 +31,24 @@ public class Program {
 				setChoice = Integer.parseInt(scanner.nextLine());
 				mainMenu.choiceResponse(setChoice, vendingMachine.getSlots(), vendingMachine);
 				isInvalidMain = false;
-			} catch (NumberFormatException e) {
-				isInvalidMain = true;
-				System.out.println("Invalid input. Please enter a valid choice.");
-			}
-			catch (InputMismatchException e) {
+			} catch (NumberFormatException | InputMismatchException e) {
 				System.out.println("Invalid input. Please enter a valid choice.");
 			}
 		}
-		while (isInvalidMain = true);
+		while (isInvalidMain);
 
 		// Display Purchase Menu options
 		System.out.println();
 		System.out.print("Please choose a menu option: ");
 
-		boolean isInvalidPurchase = true;
-//		do {
+
 			try {
 				purchaseChoice = Integer.parseInt(scanner.nextLine());
 				purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
 			} catch (NumberFormatException e) {
-				isInvalidPurchase = true;
+
 				System.out.println("Invalid input. Please enter a valid choice.");
 			}
-
-//		while (isInvalidPurchase = true) ;
 
 		scanner.close();
 	}

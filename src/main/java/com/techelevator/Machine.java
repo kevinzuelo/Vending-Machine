@@ -28,7 +28,12 @@ public class Machine {
     public void setTransactionBalance(BigDecimal transactionBalance) {
         this.transactionBalance = this.transactionBalance.add(transactionBalance);
     }
-// Other Methods
+
+    public VendingItem getFirstItem(String location) {
+        return (VendingItem)slots.get(location).element();
+    }
+
+    // Other Methods
         // to add: vendItem(), update inputMoney / machineBalance
     public VendingItem vendItem(String location) throws IOException {
         Queue<VendingItem> temp = slots.get(location);
@@ -40,7 +45,7 @@ public class Machine {
         return (VendingItem)slots.get(location).poll();
     }
     // Creates a new Inventory object
-    public Map<String, Queue> fillMachine(String path){
+    public void fillMachine(String path){
        Inventory inventory = new Inventory();
        inventory.getInventory(path);
        // Places each queue (group of 5 snacks) into the map. Key is the slot location, value is the queue
@@ -49,11 +54,6 @@ public class Machine {
             myMap.put(queue.element().getLocation(), queue);
         }
         slots = myMap;
-        return slots;
-    }
-
-    public VendingItem getFirstItem(String location) {
-        return (VendingItem)slots.get(location).element();
     }
 
     public void calculateChange(BigDecimal remainingBalance) throws IOException {
@@ -77,9 +77,9 @@ public class Machine {
 
         System.out.println("Dispensing change. You received " + numberOfQuarters + " quarter(s), " + numberOfDimes + " dime(s), and " + numberOfNickels + " nickel(s).");
         System.out.println("Thank you for your purchase. Returning to Main Menu.");
-        setTransactionBalance(BigDecimal.valueOf(0));
-        // print moneys to log
+                // print moneys to log
         printToLog(" GIVE CHANGE: $" + getTransactionBalance() + " $" + change);
+        setTransactionBalance(BigDecimal.valueOf(0).subtract(getTransactionBalance()));
     }
 
     public void printToLog(String message) throws IOException {
@@ -88,7 +88,7 @@ public class Machine {
                 String newLine = (LocalDateTime.now().format(DateTimeFormatter.ofPattern("\n MM/dd/yyyy HH:mm:ss a")) + " " + message);
                 logWriter.append(newLine);
             } catch (FileNotFoundException e) {
-
+                System.out.println("File not Found");
             }
             catch (IOException e) {
                 e.printStackTrace();

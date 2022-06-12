@@ -1,10 +1,6 @@
 package com.techelevator;
 
-import java.io.File;
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
 
 public class VendingItem {
 
@@ -12,7 +8,6 @@ public class VendingItem {
 
     private String name;
     private BigDecimal price;
-    private String message;
     private String type;
     private String location;
 
@@ -38,9 +33,6 @@ public class VendingItem {
     }
     public BigDecimal getPrice() {
         return price;
-    }
-    public String getMessage() {
-        return message;
     }
     public String getType() {
         return type;

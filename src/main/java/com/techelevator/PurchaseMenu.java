@@ -1,16 +1,11 @@
 package com.techelevator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
+
 public class PurchaseMenu extends Menu{
 
     // Properties
@@ -41,59 +36,65 @@ public class PurchaseMenu extends Menu{
                     System.out.println();
                     displayMenu();
                     System.out.print("Choose another menu option: ");
-                    int newChoice = inputScanner.nextInt();
-                    choiceResponse(newChoice, stockedItems, currentMachine);
-                } catch (NumberFormatException | NoSuchElementException e) {
+                    choice = inputScanner.nextInt();
+                    choiceResponse(choice, stockedItems, currentMachine);
+                } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid dollar amount.");
+                    choiceResponse(choice, stockedItems, currentMachine);
+                } catch (Exception e) {
+                    System.out.println("Error please try again");
                     choiceResponse(choice, stockedItems, currentMachine);
                 }
 
 
+
             } else if (choice == 2) {
-                for (Queue<VendingItem> queue : stockedItems.values()) {
-                    if(queue.size() == 1) {
-                        oneLeft = queue.element();
-                        System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                    for (Queue<VendingItem> queue : stockedItems.values()) {
+                        if(queue.size() == 1) {
+                            oneLeft = queue.element();
+                            System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                        }
+                        else if(queue.size() == 0) {
+                            System.out.println(oneLeft.getLocation() + " || " + oneLeft.getName() + " || $" + oneLeft.getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + "SOLD OUT");
+                        }
+                        else {
+                            System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
+                        }
                     }
-                    else if(queue.size() == 0) {
-                        System.out.println(oneLeft.getLocation() + " || " + oneLeft.getName() + " || $" + oneLeft.getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + "SOLD OUT");
-                    }
-                    else {
-                        System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
-                    }
-                }
-                System.out.print("Choose Item Location: ");
+                    System.out.print("Choose Item Location: ");
 
-                    location = inputScanner.nextLine().toUpperCase();
+                        location = inputScanner.nextLine().toUpperCase();
 
-                    if (!stockedItems.containsKey(location.toUpperCase())) {
-                        System.out.println("\nInvalid choice, try again. \n");
-                        choiceResponse(choice, stockedItems, currentMachine);
-                    }
+                        if (!stockedItems.containsKey(location.toUpperCase())) {
+                            System.out.println("\nInvalid choice, try again. \n");
+                            choiceResponse(choice, stockedItems, currentMachine);
+                        }
 
-                 if(currentMachine.getFirstItem(location).getPrice().compareTo(currentMachine.getTransactionBalance()) > 0) {
-                     System.out.println("\nInsufficient funds, please insert more money.");
-                     displayMenu();
-                     System.out.print("Choose another menu option: ");
-                     int newChoice = inputScanner.nextInt();
-                     choiceResponse(newChoice, stockedItems, currentMachine);
-                 }
-                 else {
-                     VendingItem thisItem = currentMachine.vendItem(location);
-                     System.out.println("\nThe machine dispensed " + thisItem.getName() + "! \nCost: $" + thisItem.getPrice().setScale(2, RoundingMode.CEILING) + " \n***** " + thisItem.printMessage() +" *****\n" +
-                             "Your remaining balance is: $" + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
-                     displayMenu();
-                     System.out.print("Choose another menu option: ");
-                     int newChoice = inputScanner.nextInt();
-                     choiceResponse(newChoice, stockedItems, currentMachine);
-                 }
+                     if(currentMachine.getFirstItem(location).getPrice().compareTo(currentMachine.getTransactionBalance()) > 0) {
+                         System.out.println("\nInsufficient funds, please insert more money.");
+                         displayMenu();
+                         System.out.print("Choose another menu option: ");
+                         choice = inputScanner.nextInt();
+                         choiceResponse(choice, stockedItems, currentMachine);
+                     }
+                     else {
+                         VendingItem thisItem = currentMachine.vendItem(location);
+                         System.out.println("\nThe machine dispensed " + thisItem.getName() + "! \nCost: $" + thisItem.getPrice().setScale(2, RoundingMode.CEILING) + " \n***** " + thisItem.printMessage() + " *****\n" +
+                                 "Your remaining balance is: $" + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
+                         displayMenu();
+
+                         System.out.print("Choose another menu option: ");
+                         choice = inputScanner.nextInt();
+                         choiceResponse(choice, stockedItems, currentMachine);
+                     }
+
+
             } else if (choice == 3) {
                 MainMenu mainMenu = new MainMenu();
                 currentMachine.calculateChange(currentMachine.getTransactionBalance());
-                currentMachine.setTransactionBalance(BigDecimal.valueOf(0).subtract(currentMachine.getTransactionBalance()));
                 mainMenu.displayMenu();
-                int newChoice = inputScanner.nextInt();
-                mainMenu.choiceResponse(newChoice, stockedItems, currentMachine);
+                choice = inputScanner.nextInt();
+                mainMenu.choiceResponse(choice, stockedItems, currentMachine);
                 System.out.println("TEST");
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
@@ -101,6 +102,7 @@ public class PurchaseMenu extends Menu{
             }
         }
         catch (NoSuchElementException e) {
+
 
         } catch (IOException e) {
             e.printStackTrace();

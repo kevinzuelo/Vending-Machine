@@ -2,9 +2,7 @@ package com.techelevator;
 
 import org.w3c.dom.ls.LSOutput;
 
-import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
@@ -31,8 +29,6 @@ public class MainMenu extends Menu{
                 int newChoice = inputScanner.nextInt();
                 choiceResponse(newChoice, stockedItems, currentMachine);
             } else if (choice == 2) {
-                  boolean isInvalidPurchase = false;
-                  do {
                     try {
                         PurchaseMenu purchaseMenu = new PurchaseMenu();
                         purchaseMenu.displayMenu();
@@ -41,18 +37,16 @@ public class MainMenu extends Menu{
                         purchaseMenu.choiceResponse(choice, stockedItems, currentMachine);
                     }
                     catch (Exception e) {
-                        isInvalidPurchase = true;
                         System.out.println("Invalid input. Please enter a valid choice.");
+                        choiceResponse(choice, stockedItems, currentMachine);
                     }
-                } while (isInvalidPurchase);
-                  isInvalidPurchase = false;
+
 
             } else if (choice == 3) {
                 System.out.println("\nExiting Vending Machine.  Have a great day!");
                 System.exit(0);
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3!");
-                return;
              }
     }
 

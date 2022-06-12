@@ -51,6 +51,7 @@ public class Inventory {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Input a valid inventory file.");
+            getInventory(path);
         }
     }
 

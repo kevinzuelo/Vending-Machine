@@ -13,10 +13,7 @@ public class Program {
 		int setChoice = 0;
 		int purchaseChoice = 0;
 
-		// Create Sales Log
-
-
-		// Restock machine upon start up
+		// Restock machine to full upon start up
 		Inventory inventory = new Inventory();
 		inventory.getInventory(path);
 		Machine vendingMachine = new Machine();
@@ -41,12 +38,10 @@ public class Program {
 		System.out.println();
 		System.out.print("Please choose a menu option: ");
 
-
 			try {
 				purchaseChoice = Integer.parseInt(scanner.nextLine());
 				purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
 			} catch (NumberFormatException e) {
-
 				System.out.println("Invalid input. Please enter a valid choice.");
 			}
 

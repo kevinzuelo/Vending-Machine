@@ -13,8 +13,8 @@ public class VendingItem {
 
     // Constructors
 
-    public VendingItem() {
-    }
+    public VendingItem() { }
+
     public VendingItem(String name, double price) {
         this.name = name;
         this.price = BigDecimal.valueOf(price);
@@ -41,8 +41,9 @@ public class VendingItem {
         return location;
     }
 
-    // Other methods -- change message to fit each VendingItem type somehow
+    // Other methods
 
+    // Print specialized message for each item type
     public String printMessage() {
         if (type.equals("Chip")) {
             return "Crunch Crunch, Yum!";

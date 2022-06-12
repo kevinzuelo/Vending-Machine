@@ -8,7 +8,6 @@ public class Menu {
 
     // Constructors
 
-
     // Getters & setters
 
     public int getChoice() {
@@ -24,10 +23,6 @@ public class Menu {
     public void displayMenu() {}
 
     public void displayItems() {}
-
-    // Display all items including quantity remaining
-
-
 
 
 

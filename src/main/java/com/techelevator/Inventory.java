@@ -13,22 +13,18 @@ public class Inventory {
 
     // Constructors
 
-
     // Getters & setters
 
-    public List<VendingItem> getItemList() {
-        return itemList;
-    }
+    public List<VendingItem> getItemList() { return itemList; }
 
     public List<Queue> getQueues() {
         return queues;
     }
 
-
     // Other methods
 
     public void getInventory(String path) {
-        // Pull inventory list from .csv file
+        // Pull inventory list from .csv file one line at a time
         File inventoryFile = new File(path);
         try (Scanner fileScanner = new Scanner(inventoryFile)) {
             while (fileScanner.hasNextLine()) {
@@ -37,7 +33,7 @@ public class Inventory {
                 String[] vendingItemProperties = itemLine.split(",");
                 // String array becomes VendingItem object
                 VendingItem item = new VendingItem(vendingItemProperties[0], vendingItemProperties[1], Double.parseDouble(vendingItemProperties[2]), vendingItemProperties[3]);
-                // Object gets added to VendingItem list
+                // VendingItem object gets added to VendingItem list
                 itemList.add(item);
             }
             // Each VendingItem list is added to a queue 5 times
@@ -54,8 +50,5 @@ public class Inventory {
             getInventory(path);
         }
     }
-
-
-
 
 }

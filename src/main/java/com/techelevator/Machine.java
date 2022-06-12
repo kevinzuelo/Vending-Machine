@@ -13,11 +13,9 @@ public class Machine {
     private BigDecimal transactionBalance = BigDecimal.valueOf(0.00);
     private final String PATH = System.getProperty("java.io.tmpdir") + "/SalesLog.txt";
 
-
     // Constructors
 
     // Getters & Setters
-
     public Map<String, Queue> getSlots() {
         return slots;
     }
@@ -34,7 +32,8 @@ public class Machine {
     }
 
     // Other Methods
-        // to add: vendItem(), update inputMoney / machineBalance
+
+    // Takes input from user for slot location, subtracts price from machine balance, gives item to user
     public VendingItem vendItem(String location) throws IOException {
         Queue<VendingItem> temp = slots.get(location);
             BigDecimal itemPrice = (temp.element().getPrice());
@@ -42,8 +41,10 @@ public class Machine {
 
             printToLog(temp.element().getName() + " " + location +  " $" + itemPrice +  " $"  + transactionBalance);
 
+        // Removes one item from the queue to update inventory quantity
         return (VendingItem)slots.get(location).poll();
     }
+
     // Creates a new Inventory object
     public void fillMachine(String path){
        Inventory inventory = new Inventory();
@@ -56,6 +57,7 @@ public class Machine {
         slots = myMap;
     }
 
+    // Takes amount left in machine and returns it to user in change, using smallest amount of coins
     public void calculateChange(BigDecimal remainingBalance) throws IOException {
         BigDecimal change = remainingBalance;
         int numberOfQuarters = 0;
@@ -74,14 +76,15 @@ public class Machine {
             numberOfNickels++;
             change = change.subtract(BigDecimal.valueOf(.05));
         }
-
         System.out.println("Dispensing change. You received " + numberOfQuarters + " quarter(s), " + numberOfDimes + " dime(s), and " + numberOfNickels + " nickel(s).");
         System.out.println("Thank you for your purchase. Returning to Main Menu.");
-                // print moneys to log
+
+        // Prints change amount given to Sales Log
         printToLog(" GIVE CHANGE: $" + getTransactionBalance() + " $" + change);
         setTransactionBalance(BigDecimal.valueOf(0).subtract(getTransactionBalance()));
     }
 
+    // Basic method and message for printing to Sales Log
     public void printToLog(String message) throws IOException {
         File salesLog = new File(PATH);
             try (PrintWriter logWriter = new PrintWriter(new FileWriter(salesLog, true))) {
@@ -94,5 +97,4 @@ public class Machine {
                 e.printStackTrace();
             }
     }
-
 }

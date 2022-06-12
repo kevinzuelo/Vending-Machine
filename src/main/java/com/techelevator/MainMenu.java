@@ -10,17 +10,16 @@ import java.util.Scanner;
 public class MainMenu extends Menu{
     // Properties
 
-
     // Constructors
 
     // Getters & setters
 
     // Other methods
 
-    // Method for menu choice response
-
+    // Method for Main Menu choice response
     public void choiceResponse(int choice, Map<String, Queue> stockedItems, Machine currentMachine) {
             Scanner inputScanner = new Scanner(System.in);
+              // Displays entire inventory with quantities remaining
               if (choice == 1) {
                 for (Queue<VendingItem> queue : stockedItems.values()) {
                     System.out.println(queue.element().getLocation() + " || " + queue.element().getName() + " || $" + queue.element().getPrice().setScale(2, RoundingMode.CEILING) + " || Quantity Remaining: " + queue.size());
@@ -28,6 +27,7 @@ public class MainMenu extends Menu{
                 displayMenu();
                 int newChoice = inputScanner.nextInt();
                 choiceResponse(newChoice, stockedItems, currentMachine);
+              // Displays Purchase Menu
             } else if (choice == 2) {
                     try {
                         PurchaseMenu purchaseMenu = new PurchaseMenu();
@@ -40,8 +40,7 @@ public class MainMenu extends Menu{
                         System.out.println("Invalid input. Please enter a valid choice.");
                         choiceResponse(choice, stockedItems, currentMachine);
                     }
-
-
+              // Exits machine and terminates program
             } else if (choice == 3) {
                 System.out.println("\nExiting Vending Machine.  Have a great day!");
                 System.exit(0);
@@ -50,6 +49,7 @@ public class MainMenu extends Menu{
              }
     }
 
+    // Display options for Main Menu
     @Override
     public void displayMenu() {
         System.out.println("\n(1) Display Vending Machine Items");
@@ -57,5 +57,4 @@ public class MainMenu extends Menu{
         System.out.println("(3) Exit");
         System.out.print("\nPlease choose a menu option: ");
     }
-
 }

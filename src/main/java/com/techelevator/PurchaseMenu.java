@@ -26,9 +26,15 @@ public class PurchaseMenu extends Menu{
                 try {
                     System.out.print("\nEnter amount of dollars: ");
                     BigDecimal numberOfDollars = BigDecimal.valueOf(Integer.parseInt(inputScanner.nextLine()));
-                    currentMachine.setTransactionBalance(numberOfDollars);
-                    System.out.println("\nCurrent amount provided: $ " + numberOfDollars.setScale(2, RoundingMode.CEILING));
-                    System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
+                    BigDecimal zeroDollars = BigDecimal.valueOf(0);
+                    if (numberOfDollars.compareTo(zeroDollars) > 0) {
+                        currentMachine.setTransactionBalance(numberOfDollars);
+                        System.out.println("\nCurrent amount provided: $ " + numberOfDollars.setScale(2, RoundingMode.CEILING));
+                        System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
+                    }
+                    else {
+                        System.out.println("Please enter a positive dollar amount!");
+                    }
 
                     // Amount of money fed to machine added to Sales Log
                     currentMachine.printToLog(" FEED MONEY: $" + numberOfDollars + " $" + currentMachine.getTransactionBalance());

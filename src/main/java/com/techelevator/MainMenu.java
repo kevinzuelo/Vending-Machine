@@ -31,7 +31,7 @@ public class MainMenu extends Menu{
                 int newChoice = inputScanner.nextInt();
                 choiceResponse(newChoice, stockedItems, currentMachine);
             } else if (choice == 2) {
-                  boolean isInvalidPurchase = true;
+                  boolean isInvalidPurchase = false;
                   do {
                     try {
                         PurchaseMenu purchaseMenu = new PurchaseMenu();
@@ -45,6 +45,7 @@ public class MainMenu extends Menu{
                         System.out.println("Invalid input. Please enter a valid choice.");
                     }
                 } while (isInvalidPurchase);
+                  isInvalidPurchase = false;
 
             } else if (choice == 3) {
                 System.out.println("\nExiting Vending Machine.  Have a great day!");

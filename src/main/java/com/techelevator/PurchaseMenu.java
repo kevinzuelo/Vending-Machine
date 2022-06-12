@@ -30,7 +30,7 @@ public class PurchaseMenu extends Menu{
 
                 try {
                     System.out.print("\nEnter amount of dollars: ");
-                    BigDecimal numberOfDollars = BigDecimal.valueOf(Double.parseDouble(inputScanner.nextLine()));
+                    BigDecimal numberOfDollars = BigDecimal.valueOf(Integer.parseInt(inputScanner.nextLine()));
                     currentMachine.setTransactionBalance(numberOfDollars);
                     System.out.println("\nCurrent amount provided: $ " + numberOfDollars.setScale(2, RoundingMode.CEILING));
                     System.out.println("Total amount provided: $ " + currentMachine.getTransactionBalance().setScale(2, RoundingMode.CEILING));
@@ -43,8 +43,9 @@ public class PurchaseMenu extends Menu{
                     System.out.print("Choose another menu option: ");
                     int newChoice = inputScanner.nextInt();
                     choiceResponse(newChoice, stockedItems, currentMachine);
-                } catch (NumberFormatException | InputMismatchException e) {
+                } catch (NumberFormatException | NoSuchElementException e) {
                     System.out.println("Please enter a valid dollar amount.");
+                    choiceResponse(choice, stockedItems, currentMachine);
                 }
 
 

@@ -26,7 +26,7 @@ public class Machine {
     }
 
     public void setTransactionBalance(BigDecimal transactionBalance) {
-        this.transactionBalance = transactionBalance;
+        this.transactionBalance = this.transactionBalance.add(transactionBalance);
     }
 // Other Methods
         // to add: vendItem(), update inputMoney / machineBalance

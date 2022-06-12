@@ -89,7 +89,7 @@ public class PurchaseMenu extends Menu{
             } else if (choice == 3) {
                 MainMenu mainMenu = new MainMenu();
                 currentMachine.calculateChange(currentMachine.getTransactionBalance());
-                currentMachine.setTransactionBalance(BigDecimal.valueOf(0));
+                currentMachine.setTransactionBalance(BigDecimal.valueOf(0).subtract(currentMachine.getTransactionBalance()));
                 mainMenu.displayMenu();
                 int newChoice = inputScanner.nextInt();
                 mainMenu.choiceResponse(newChoice, stockedItems, currentMachine);

@@ -47,7 +47,7 @@ public class Program {
 				mainMenu.choiceResponse(setChoice, vendingMachine.getSlots(), vendingMachine);
 				isInvalidMain = false;
 			} catch (NumberFormatException | InputMismatchException e) {
-				System.out.println("Invalid input. Please enter a valid choice.");
+				System.out.println(ANSI_RED + "\nInvalid input. Please enter a valid choice." + ANSI_RESET);
 			}
 		}
 		while (isInvalidMain);
@@ -60,7 +60,7 @@ public class Program {
 				purchaseChoice = Integer.parseInt(scanner.nextLine());
 				purchaseMenu.choiceResponse(purchaseChoice, vendingMachine.getSlots(), vendingMachine);
 			} catch (NumberFormatException e)  {
-				System.out.println("Invalid input. Please enter a valid choice.");
+				System.out.println(ANSI_RED + "\nInvalid input. Please enter a valid choice." + ANSI_RESET);
 			} catch (Exception e) {
 				purchaseMenu.displayMenu();
 
